@@ -25,15 +25,12 @@ def get_filters():
     while city not in cities:
         city= input('Not an appropriate choice. Please select new choice of city: \n').lower()
 
-    
     # get user input for month (all, january, february, ... , june)
-    
+
     month = input("Which month? January, February, March, April, May, June or all\n").lower()
     months = ['january','february','march','april','may','june','all']
     while month not in months:
         month = input('Not an appropriate choice. Please select another choice of month: \n').lower()
-
-
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day=input('Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or all\n').lower()
@@ -41,11 +38,8 @@ def get_filters():
     while day not in days:
        day = input('Not an appropriate choice. Please select another choice of day: \n').lower()
 
-    
-
     print('-'*40)
     return city, month, day
-
 
 def load_data(city, month, day):
     """
@@ -76,7 +70,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month)+1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -84,7 +78,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df = df[df['day_of_week'] == day.title()]
-    
+
     return df
 
 
@@ -128,7 +122,7 @@ def station_stats(df):
     df['trip'] = df['Start Station'] + " TO " + df['End Station']
     common_trip = df['trip'].mode()[0]
     print ('Most frequent combination of start and end station: ', common_trip)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -138,7 +132,7 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     df['Travel Time'] = df['End Time'] - df['Start Time']
 
     # display total travel time
@@ -162,33 +156,33 @@ def user_stats(df, city):
     print('Count of user types:\n')
     print(user_types)
 
-    
+
 
     if city != 'washington':
         # Display counts of gender
         gender = df['Gender'].value_counts()
         print('Count of gender:\n')
         print(gender)
-        
+
         # Display earliest, most recent, and most common year of birth
         min_birth = df['Birth Year'].min()
         max_birth = df['Birth Year'].max()
         common_birth = df['Birth Year'].mode()[0]
-        
+
         print('Earliest Birth Year: ', min_birth)
         print('Most Recent Birth Year: ', max_birth)
         print('Most Common Birth Year: ', common_birth)
-    
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def display_data(df):
     """Displays 5 lines of raw data upon user request"""
-    
+
     start_loc = 0
     end_loc = 5
-    
+
     show_data = input("Do you want to see 5 lines of raw data? \n").lower()
     if show_data == 'yes':
         while end_loc <= df.shape[0] - 1:
