@@ -5,7 +5,7 @@ Date created: 4/25/2020
 Bikeshare Analysis
 
 ### Description
-Explore data related to bike share systems for three major cities in the United States—Chicago, New York City, and Washington.
+Explore data related to bike share systems for three major cities in the United States— Chicago, New York City, and Washington.
 
 ### Files used
 bikeshare.py
